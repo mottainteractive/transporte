@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transportes Ruta Viva | Carga y mudanzas</title>
+<meta name="description" content="Transporte de carga, mudanzas y paquetería. Cotiza tu viaje y recibe respuesta por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asfalto:#1c2127; --papel:#f4f5f2; --linea:#f2b705; --acero:#59636d;
+  --borde:#d5d9d6; --blanco:#fff; --ok:#1f7a4d;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--asfalto);font-family:'IBM Plex Sans',Arial,sans-serif;line-height:1.55}
+h1,h2,h3{font-family:'Barlow Condensed','Arial Narrow',sans-serif;line-height:1.02;margin:0;font-weight:800}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--linea);outline-offset:2px}
+section[id]{scroll-margin-top:70px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+/* Cabecera */
+header.top{position:sticky;top:0;z-index:20;background:var(--asfalto);color:var(--papel)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.marca{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.45rem;letter-spacing:.5px;text-decoration:none}
+.marca b{color:var(--linea)}
+nav{display:flex;gap:22px;align-items:center}
+nav a{font-size:.92rem;text-decoration:none;color:#cfd4d8}
+nav a:hover{color:var(--linea)}
+.tel{background:var(--linea);color:var(--asfalto);padding:8px 16px;font-weight:600;border-radius:3px}
+.tel:hover{background:#ffd23f;color:var(--asfalto)}
+
+/* Hero */
+.hero{padding:64px 0 72px;background:var(--asfalto);color:var(--papel);position:relative}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:8px;
+  background:repeating-linear-gradient(90deg,var(--linea) 0 46px,transparent 46px 80px)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:start}
+.hero h1{font-size:clamp(2.9rem,7vw,5.4rem);text-transform:uppercase}
+.hero h1 span{display:block;color:var(--linea)}
+.hero p.lead{max-width:46ch;color:#cfd4d8;margin:22px 0 26px;font-size:1.05rem}
+.datos{display:flex;flex-wrap:wrap;gap:10px 26px;color:#aab1b8;font-size:.92rem;padding:0;margin:0;list-style:none}
+.datos li::before{content:"✓ ";color:var(--linea);font-weight:700}
+
+/* Guía (formulario) */
+.guia{background:var(--blanco);color:var(--asfalto);border-radius:4px;padding:26px 24px 24px;position:relative;
+  box-shadow:0 18px 50px rgba(0,0,0,.35);border-top:6px solid var(--linea)}
+.guia h2{font-size:1.9rem;text-transform:uppercase}
+.guia .sub{margin:4px 0 18px;color:var(--acero);font-size:.9rem}
+.ruta{display:grid;grid-template-columns:1fr 26px 1fr;align-items:end;gap:6px;margin-bottom:14px}
+.ruta .flecha{padding-bottom:11px;text-align:center;color:var(--acero);font-weight:700}
+.campo{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}
+.fila{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{font-size:.82rem;font-weight:600;color:var(--asfalto)}
+input,select,textarea{font:inherit;padding:11px 12px;border:1.5px solid var(--borde);border-radius:3px;background:#fbfbfa;color:var(--asfalto);width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--asfalto);outline:none;box-shadow:0 0 0 3px rgba(242,183,5,.5)}
+.err{border-color:#b3261e!important;background:#fff5f4}
+.msg-err{color:#b3261e;font-size:.85rem;min-height:1.2em;margin:0 0 8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px 18px;border:0;border-radius:3px;
+  background:var(--ok);color:#fff;font:600 1.02rem 'IBM Plex Sans',sans-serif;cursor:pointer;text-decoration:none}
+.btn:hover{background:#18633d}
+.btn.sec{background:var(--asfalto);width:auto}
+.btn.sec:hover{background:#000}
+.nota{font-size:.8rem;color:var(--acero);margin:10px 0 0;text-align:center}
+
+/* Secciones */
+.sec{padding:76px 0}
+.sec.alt{background:var(--blanco);border-top:1px solid var(--borde);border-bottom:1px solid var(--borde)}
+.sec h2.t{font-size:clamp(2.1rem,4.4vw,3.2rem);text-transform:uppercase}
+.sec p.i{color:var(--acero);max-width:58ch;margin:12px 0 34px}
+
+/* Servicios */
+.servicios{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0;border:1.5px solid var(--asfalto)}
+.serv{padding:26px 22px;border-right:1.5px solid var(--asfalto);border-bottom:1.5px solid var(--asfalto);margin:0 -1.5px -1.5px 0;background:var(--papel);
+  display:flex;flex-direction:column;gap:8px}
+.serv h3{font-size:1.55rem;text-transform:uppercase}
+.serv p{margin:0;color:var(--acero);font-size:.94rem;flex:1}
+.serv button{align-self:flex-start;margin-top:10px;background:none;border:0;border-bottom:3px solid var(--linea);padding:2px 0;
+  font:600 .92rem 'IBM Plex Sans',sans-serif;color:var(--asfalto);cursor:pointer}
+.serv button:hover{background:var(--linea)}
+
+/* Flota */
+.tabla{width:100%;border-collapse:collapse;background:var(--papel);font-size:.95rem}
+.tabla th,.tabla td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--borde)}
+.tabla th{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;background:var(--asfalto);color:var(--papel)}
+.tabla td:first-child{font-weight:600}
+.scroll{overflow-x:auto;border:1.5px solid var(--asfalto)}
+
+/* Proceso */
+.pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px;counter-reset:p;list-style:none;padding:0;margin:0}
+.pasos li{counter-increment:p;border-top:4px solid var(--linea);padding-top:16px}
+.pasos li::before{content:"Paso " counter(p);font-size:.82rem;font-weight:600;color:var(--acero)}
+.pasos h3{font-size:1.5rem;margin:4px 0 6px;text-transform:uppercase}
+.pasos p{margin:0;color:var(--acero);font-size:.94rem}
+
+/* Cobertura */
+.cob{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
+.cob li{padding:9px 16px;border:1.5px solid var(--asfalto);border-radius:999px;font-weight:500;background:var(--papel)}
+
+/* FAQ */
+details{border-bottom:1px solid var(--borde);padding:16px 0}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::after{content:"+";font-weight:700;font-size:1.3rem;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin:10px 0 0;color:var(--acero);max-width:70ch}
+
+/* Contacto y pie */
+.contacto{background:var(--asfalto);color:var(--papel);padding:70px 0;position:relative}
+.contacto::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;
+  background:repeating-linear-gradient(90deg,var(--linea) 0 46px,transparent 46px 80px)}
+.contacto h2{font-size:clamp(2.2rem,5vw,3.6rem);text-transform:uppercase}
+.contacto p{color:#cfd4d8;max-width:52ch}
+.botones{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.botones .btn{width:auto;padding:14px 26px}
+.botones .btn.claro{background:transparent;border:1.5px solid var(--papel)}
+.botones .btn.claro:hover{background:var(--papel);color:var(--asfalto)}
+footer{background:#12161a;color:#8f979e;font-size:.85rem;padding:22px 0}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
+
+/* WhatsApp flotante */
+.wa{position:fixed;right:18px;bottom:18px;z-index:30;display:flex;align-items:center;gap:8px;background:var(--ok);color:#fff;
+  padding:13px 18px;border-radius:999px;font-weight:600;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.wa:hover{background:#18633d}
+
+#aviso{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);background:var(--asfalto);color:var(--papel);padding:12px 20px;border-radius:3px;
+  border-left:5px solid var(--linea);opacity:0;pointer-events:none;transition:opacity .25s;z-index:40}
+#aviso.ver{opacity:1}
+
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr}
+  nav a:not(.tel){display:none}
+}
+@media (max-width:520px){
+  .ruta{grid-template-columns:1fr}
+  .ruta .flecha{display:none}
+  .fila{grid-template-columns:1fr}
+  .wa span{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="marca" href="#inicio" data-nombre>RUTA <b>VIVA</b></a>
+    <nav aria-label="Principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#flota">Flota</a>
+      <a href="#proceso">Cómo funciona</a>
+      <a href="#faq">Preguntas</a>
+      <a class="tel" href="#cotizar">Cotizar viaje</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Tu carga llega<span>a tiempo y completa</span></h1>
+        <p class="lead">Transporte de carga, mudanzas y paquetería entre ciudades. Dinos de dónde a dónde y te respondemos con el valor del viaje por WhatsApp.</p>
+        <ul class="datos">
+          <li>Vehículos asegurados</li>
+          <li>Conductores con experiencia</li>
+          <li>Seguimiento por WhatsApp</li>
+        </ul>
+      </div>
+
+      <form class="guia" id="cotizar" novalidate aria-labelledby="t-guia">
+        <h2 id="t-guia">Cotiza tu viaje</h2>
+        <p class="sub">Llena la guía y la enviamos directo a nuestro WhatsApp.</p>
+
+        <div class="ruta">
+          <div class="campo" style="margin:0">
+            <label for="origen">Origen</label>
+            <input id="origen" name="origen" placeholder="Ciudad de cargue" autocomplete="off" required>
+          </div>
+          <div class="flecha" aria-hidden="true">→</div>
+          <div class="campo" style="margin:0">
+            <label for="destino">Destino</label>
+            <input id="destino" name="destino" placeholder="Ciudad de entrega" autocomplete="off" required>
+          </div>
+        </div>
+
+        <div class="fila">
+          <div class="campo">
+            <label for="vehiculo">Tipo de servicio</label>
+            <select id="vehiculo" name="vehiculo" required></select>
+          </div>
+          <div class="campo">
+            <label for="fecha">Fecha del cargue</label>
+            <input type="date" id="fecha" name="fecha" required>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="carga">¿Qué vas a transportar?</label>
+          <input id="carga" name="carga" placeholder="Ej: 20 estibas de cemento, nevera, cajas" required>
+        </div>
+
+        <div class="fila">
+          <div class="campo">
+            <label for="nombre">Tu nombre</label>
+            <input id="nombre" name="nombre" autocomplete="name" required>
+          </div>
+          <div class="campo">
+            <label for="celular">Tu celular</label>
+            <input id="celular" name="celular" type="tel" inputmode="tel" autocomplete="tel" placeholder="300 123 4567" required>
+          </div>
+        </div>
+
+        <p class="msg-err" id="msg-err" role="alert"></p>
+        <button type="submit" class="btn">Enviar cotización por WhatsApp</button>
+        <p class="nota">Sin compromiso. Te respondemos el mismo día en horario laboral.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="sec" id="servicios">
+    <div class="wrap">
+      <h2 class="t">Qué transportamos</h2>
+      <p class="i">Elige el servicio y la guía de cotización se llena sola.</p>
+      <div class="servicios" id="lista-servicios"></div>
+    </div>
+  </section>
+
+  <section class="sec alt" id="flota">
+    <div class="wrap">
+      <h2 class="t">Nuestra flota</h2>
+      <p class="i">Capacidades de referencia. Si dudas cuál necesitas, escríbenos y te ayudamos a escoger.</p>
+      <div class="scroll">
+        <table class="tabla">
+          <thead><tr><th>Vehículo</th><th>Capacidad</th><th>Ideal para</th></tr></thead>
+          <tbody id="tabla-flota"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="proceso">
+    <div class="wrap">
+      <h2 class="t">Cómo funciona</h2>
+      <p class="i">Cuatro pasos, sin papeleos innecesarios.</p>
+      <ol class="pasos">
+        <li><h3>Cotizas</h3><p>Llenas la guía con origen, destino y carga.</p></li>
+        <li><h3>Confirmamos</h3><p>Te enviamos el valor y el vehículo asignado por WhatsApp.</p></li>
+        <li><h3>Cargamos</h3><p>El conductor llega en la fecha acordada y carga con cuidado.</p></li>
+        <li><h3>Entregamos</h3><p>Te avisamos en el camino y al llegar a destino.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec alt" id="cobertura">
+    <div class="wrap">
+      <h2 class="t">Dónde operamos</h2>
+      <p class="i">Rutas frecuentes. ¿No ves tu ciudad? Pregúntanos, también cubrimos otros destinos.</p>
+      <ul class="cob" id="lista-cob"></ul>
+    </div>
+  </section>
+
+  <section class="sec" id="faq">
+    <div class="wrap">
+      <h2 class="t">Preguntas frecuentes</h2>
+      <div style="margin-top:26px">
+        <details><summary>¿Cómo se calcula el valor del viaje?</summary><p>Depende de la distancia, el tipo de vehículo, el peso o volumen y si hay cargue o descargue con ayudantes. Por eso lo confirmamos por WhatsApp antes de programar.</p></details>
+        <details><summary>¿La carga va asegurada?</summary><p>Sí. Pregúntanos por la póliza de transporte según el valor de tu mercancía.</p></details>
+        <details><summary>¿Puedo programar el viaje con anticipación?</summary><p>Sí. Elige la fecha en la guía y reservamos el vehículo. Para servicios urgentes escríbenos directamente.</p></details>
+        <details><summary>¿Hacen mudanzas con ayudantes?</summary><p>Sí, podemos incluir ayudantes de cargue y descargue. Indícalo en el campo de carga.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="contacto" id="contacto">
+    <div class="wrap">
+      <h2>¿Necesitas mover algo hoy?</h2>
+      <p>Escríbenos o llámanos y coordinamos el viaje.</p>
+      <div class="botones">
+        <a class="btn" id="btn-wa" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+        <a class="btn claro" id="btn-tel" href="#">Llamar ahora</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="anio">2026</span> <span data-nombre-plano>Transportes Ruta Viva</span>. Todos los derechos reservados.</span>
+    <span id="pie-ciudad"></span>
+  </div>
+</footer>
+
+<a class="wa" id="wa-flotante" href="#" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.200Zm4.500-6.100c-.2-.1-1.500-.7-1.700-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.200-.3.200-.5.100a6.700 6.700 0 0 1-3.300-2.900c-.2-.4.200-.4.700-1.300.1-.2 0-.3 0-.5l-.8-1.800c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.100-.7.300-.2.300-.9.900-.9 2.200s.9 2.500 1 2.700c.1.200 1.800 2.800 4.400 3.900 1.600.7 2.300.7 3.100.6.500-.1 1.500-.6 1.700-1.200.2-.6.200-1.100.2-1.200-.1-.2-.3-.2-.5-.3Z"/></svg>
+  <span>WhatsApp</span>
+</a>
+<div id="aviso" role="status"></div>
+
+<script>
+/* ============================================================
+   CONFIGURACIÓN: edita solo este bloque
+============================================================ */
+var EMPRESA = {
+  nombre: "Transportes Ruta Viva",
+  whatsapp: "573001234567",      // código de país + número, sin +, espacios ni guiones
+  telefono: "3001234567",        // para el botón "Llamar ahora"
+  ciudadBase: "Cumaral, Meta",
+
+  servicios: [
+    { nombre: "Carga pesada", desc: "Tractomula y camión para mercancía en estibas, materiales y maquinaria." },
+    { nombre: "Camión sencillo", desc: "Cargas medianas entre ciudades: comercio, agro y construcción." },
+    { nombre: "Mudanzas", desc: "Hogar y oficina, con cargue y descargue cuidadoso y ayudantes opcionales." },
+    { nombre: "Paquetería y entregas", desc: "Envíos pequeños y medianos, puerta a puerta." }
+  ],
+
+  flota: [
+    { vehiculo: "Camioneta / Turbo", capacidad: "Hasta 1,5 toneladas", ideal: "Mudanzas pequeñas, paquetería, mercancía liviana" },
+    { vehiculo: "Camión sencillo", capacidad: "Hasta 8 toneladas", ideal: "Comercio, agro, mudanzas completas" },
+    { vehiculo: "Tractomula", capacidad: "Hasta 32 toneladas", ideal: "Carga pesada y larga distancia" }
+  ],
+
+  cobertura: ["Villavicencio", "Bogotá", "Cumaral", "Restrepo", "Acacías", "Yopal", "Granada", "Tunja"]
+};
+
+/* ============================================================
+   LÓGICA
+============================================================ */
+(function () {
+  var E = EMPRESA;
+  var $ = function (s) { return document.querySelector(s); };
+
+  function aviso(t) {
+    var a = $("#aviso"); a.textContent = t; a.classList.add("ver");
+    clearTimeout(window.__t); window.__t = setTimeout(function () { a.classList.remove("ver"); }, 3000);
+  }
+  function waLink(texto) {
+    return "https://wa.me/" + E.whatsapp + (texto ? "?text=" + encodeURIComponent(texto) : "");
+  }
+  function esc(s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+
+  /* Rellenar contenido desde la configuración */
+  document.title = E.nombre + " | Carga y mudanzas";
+  document.querySelectorAll("[data-nombre-plano]").forEach(function (el) { el.textContent = E.nombre; });
+  $("#anio").textContent = new Date().getFullYear();
+  $("#pie-ciudad").textContent = "Base en " + E.ciudadBase;
+
+  var sel = $("#vehiculo");
+  sel.innerHTML = '<option value="">Selecciona…</option>' +
+    E.servicios.map(function (s) { return '<option>' + esc(s.nombre) + '</option>'; }).join("") +
+    '<option>No estoy seguro</option>';
+
+  $("#lista-servicios").innerHTML = E.servicios.map(function (s, i) {
+    return '<article class="serv"><h3>' + esc(s.nombre) + '</h3><p>' + esc(s.desc) +
+           '</p><button type="button" data-i="' + i + '">Cotizar este servicio</button></article>';
+  }).join("");
+
+  $("#tabla-flota").innerHTML = E.flota.map(function (f) {
+    return '<tr><td>' + esc(f.vehiculo) + '</td><td>' + esc(f.capacidad) + '</td><td>' + esc(f.ideal) + '</td></tr>';
+  }).join("");
+
+  $("#lista-cob").innerHTML = E.cobertura.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join("");
+
+  /* Enlaces de contacto */
+  var saludo = "Hola, quiero información sobre el servicio de transporte.";
+  $("#btn-wa").href = waLink(saludo);
+  $("#wa-flotante").href = waLink(saludo);
+  $("#btn-tel").href = "tel:+57" + E.telefono.replace(/\D/g, "");
+
+  /* Fecha mínima: hoy */
+  var hoy = new Date(); hoy.setMinutes(hoy.getMinutes() - hoy.getTimezoneOffset());
+  $("#fecha").min = hoy.toISOString().slice(0, 10);
+
+  /* Elegir servicio desde las tarjetas */
+  $("#lista-servicios").addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-i]"); if (!b) return;
+    sel.value = E.servicios[b.dataset.i].nombre;
+    $("#cotizar").scrollIntoView({ behavior: "smooth", block: "center" });
+    $("#origen").focus({ preventScroll: true });
+  });
+
+  /* Enviar cotización por WhatsApp */
+  function formatearFecha(v) {
+    var p = v.split("-"); return p[2] + "/" + p[1] + "/" + p[0];
+  }
+  $("#cotizar").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var f = e.target, faltan = [];
+    ["origen", "destino", "vehiculo", "fecha", "carga", "nombre", "celular"].forEach(function (id) {
+      var el = document.getElementById(id), vacio = !el.value.trim();
+      el.classList.toggle("err", vacio);
+      if (vacio) faltan.push(el.previousElementSibling.textContent.toLowerCase());
+    });
+    var cel = $("#celular").value.replace(/\D/g, "");
+    if (!faltan.length && cel.length < 7) {
+      $("#celular").classList.add("err");
+      $("#msg-err").textContent = "Revisa tu celular: parece incompleto.";
+      return;
+    }
+    if (faltan.length) {
+      $("#msg-err").textContent = "Falta completar: " + faltan.join(", ") + ".";
+      return;
+    }
+    $("#msg-err").textContent = "";
+
+    var texto =
+      "Hola, quiero cotizar un viaje con " + E.nombre + ".\n\n" +
+      "Origen: " + f.origen.value.trim() + "\n" +
+      "Destino: " + f.destino.value.trim() + "\n" +
+      "Servicio: " + f.vehiculo.value + "\n" +
+      "Fecha del cargue: " + formatearFecha(f.fecha.value) + "\n" +
+      "Carga: " + f.carga.value.trim() + "\n\n" +
+      "Nombre: " + f.nombre.value.trim() + "\n" +
+      "Celular: " + f.celular.value.trim();
+
+    var w = window.open(waLink(texto), "_blank");
+    if (!w) window.location.href = waLink(texto);
+    aviso("Abriendo WhatsApp con tu cotización…");
+  });
+
+  /* Quitar el error al escribir */
+  document.querySelectorAll("#cotizar input, #cotizar select").forEach(function (el) {
+    el.addEventListener("input", function () { el.classList.remove("err"); });
+  });
+})();
+</script>
+</body>
+</html>
